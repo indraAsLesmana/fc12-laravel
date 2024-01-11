@@ -19,14 +19,20 @@ use Laravel\Fortify\Fortify;
 Route::get('/', function(){
     return view('pages.auth.login');
 });
- 
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('home', function(){
+        return view('pages.dashboard-general-dashboard');
+    })->name('home');
+});
+
 // Dashboard
-Route::get('/dashboard-general-dashboard', function () {
-    return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
-});
-Route::get('/dashboard-ecommerce-dashboard', function () {
-    return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
-});
+// Route::get('/dashboard-general-dashboard', function () {
+//     return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
+// });
+// Route::get('/dashboard-ecommerce-dashboard', function () {
+//     return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
+// });
 
 
 // Layout
