@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Fortify;
 
@@ -24,6 +25,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('home', function(){
         return view('pages.dashboard-general-dashboard');
     })->name('home');
+
+    Route::resource('user', UserController::class);
 });
 
 // Dashboard
