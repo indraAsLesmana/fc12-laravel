@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Fortify;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/dashboard-general-dashboard');
+//Route::redirect('/', '/dashboard-general-dashboard');
 
+Route::get('/', function(){
+    return view('pages.auth.login');
+});
+ 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
     return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
@@ -194,12 +199,12 @@ Route::get('/modules-weather-icon', function () {
 Route::get('/auth-forgot-password', function () {
     return view('pages.auth-forgot-password', ['type_menu' => 'auth']);
 });
-Route::get('/auth-login', function () {
-    return view('pages.auth-login', ['type_menu' => 'auth']);
-});
-Route::get('/auth-login2', function () {
-    return view('pages.auth-login2', ['type_menu' => 'auth']);
-});
+
+// Route::get('/auth-login2', function () {
+//     return view('pages.auth-login2', ['type_menu' => 'auth']);
+// });
+
+
 Route::get('/auth-register', function () {
     return view('pages.auth-register', ['type_menu' => 'auth']);
 });
