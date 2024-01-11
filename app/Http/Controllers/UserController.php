@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //get users with pagination
-        $users = User::paginate(10);
+        $users = DB::table('users')
+            ->where('name', 'like', '%' . $request->search . '%')
+            ->paginate(10);
         return view('pages.user.index', compact('users'));
     }
 
@@ -36,9 +39,21 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        return view('pages.dashboard');
+        $data = $request->all();
+        $user = User::find($id);
+        // check if password is empty
+        if (empty($data['password'])) {
+            // use old password
+            $data['password'] = $user->password;
+        } else {
+            // user new password
+            $data['password'] = bcrypt($data['password']);
+        }
+        $user->update($data);
+        return redirect()->route('user.index');
+
     }
 
     /**
@@ -47,5 +62,12 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         return view('pages.dashboard');
+    }
+
+    //edit
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('pages.user.edit', compact('user'));
     }
 }

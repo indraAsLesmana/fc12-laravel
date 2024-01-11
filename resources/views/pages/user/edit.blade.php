@@ -85,8 +85,18 @@
                             </div>
                             <div class="form-group">
                                 <label>Phone</label>
-                                <input type="number" class="form-control" name="phone" value="{{ $user->phone }}">
+                                <input type="text"
+                                    class="form-control @error('Phone')
+                                is-invalid
+                            @enderror"
+                                    name="phone" value="{{ $user->phone }}">
+                                @error('phone')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
+
                             <div class="form-group">
                                 <label class="form-label">Roles</label>
                                 <div class="selectgroup w-100">
