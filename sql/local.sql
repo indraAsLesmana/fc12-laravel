@@ -16,6 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'SlateBlue','Non qui sed debitis consequatur. At unde cum sit. Placeat sed repudiandae quae dolor itaque.','https://via.placeholder.com/640x480.png/00dd88?text=cum','2024-01-12 03:15:11','2024-01-12 03:15:11');
+INSERT INTO `categories` VALUES (2,'Peru','Repudiandae dignissimos quam et qui. Aut aut dignissimos debitis id. Aperiam et delectus placeat ab qui. Praesentium minima tempore qui architecto odit. Vel magni non laudantium aliquid.','https://via.placeholder.com/640x480.png/0099ff?text=qui','2024-01-12 03:15:11','2024-01-12 03:15:11');
+INSERT INTO `categories` VALUES (3,'LightGreen','Vel hic consectetur numquam ullam fuga commodi. Aliquid fuga veniam aut nostrum voluptatibus quo quasi. Quia vel voluptatem a.','https://via.placeholder.com/640x480.png/00bbbb?text=qui','2024-01-12 03:15:11','2024-01-12 03:15:11');
+INSERT INTO `categories` VALUES (4,'SlateBlue','Debitis est laboriosam reiciendis est nobis. Sunt omnis laudantium illo. Recusandae sint consequatur ullam vitae culpa.','https://via.placeholder.com/640x480.png/0066dd?text=nam','2024-01-12 03:15:11','2024-01-12 03:15:11');
+INSERT INTO `categories` VALUES (5,'Orchid','Placeat aperiam explicabo sunt consequatur. Culpa ipsum numquam voluptatem. Expedita inventore similique architecto reprehenderit. Consequuntur repellendus recusandae sint optio earum.','https://via.placeholder.com/640x480.png/00aaaa?text=illo','2024-01-12 03:15:11','2024-01-12 03:15:11');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -56,7 +88,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +102,9 @@ INSERT INTO `migrations` VALUES (2,'2014_10_12_100000_create_password_resets_tab
 INSERT INTO `migrations` VALUES (3,'2014_10_12_200000_add_two_factor_columns_to_users_table',1);
 INSERT INTO `migrations` VALUES (4,'2019_08_19_000000_create_failed_jobs_table',1);
 INSERT INTO `migrations` VALUES (5,'2019_12_14_000001_create_personal_access_tokens_table',1);
+INSERT INTO `migrations` VALUES (6,'2024_01_11_211621_add_roles_and_phone',1);
+INSERT INTO `migrations` VALUES (7,'2024_01_12_013702_create_products_table',1);
+INSERT INTO `migrations` VALUES (8,'2024_01_12_014538_create_categories_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,6 +165,47 @@ LOCK TABLES `personal_access_tokens` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `products` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` json DEFAULT NULL,
+  `brand` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://turner.com/autem-ipsum-voluptatem-et-id-expedita','aliquam','858','maxime','Porro reprehenderit aut harum ratione. Qui omnis ratione ea aut. Voluptatem eveniet asperiores aut voluptas. Aut quisquam omnis et consequuntur.','\"https://via.placeholder.com/640x480.png/0055bb?text=iusto\"','Jones, Schmidt and Howell');
+INSERT INTO `products` VALUES (2,'2024-01-12 03:15:11','2024-01-12 03:15:11','https://sporer.com/dolorem-asperiores-repellendus-fuga-sit-tempora-explicabo.html','ipsum','166','placeat','Aut quam necessitatibus rerum. Est eos nihil quia nostrum. Quia id fuga nam.','\"https://via.placeholder.com/640x480.png/0022aa?text=debitis\"','Gulgowski LLC');
+INSERT INTO `products` VALUES (3,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://www.smith.info/vitae-soluta-sunt-dolores-eos-molestiae','omnis','123','odit','Neque inventore nesciunt soluta debitis accusantium. Nesciunt vero dolores tempora dicta rerum corporis aut modi. Et neque omnis dolor molestiae sit dolorem laboriosam.','\"https://via.placeholder.com/640x480.png/001133?text=temporibus\"','Schulist, Larkin and McGlynn');
+INSERT INTO `products` VALUES (4,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://satterfield.com/et-perferendis-laborum-expedita-impedit-non-nihil-fugiat.html','officia','861','odit','Quia harum ut qui saepe eos. Soluta facere recusandae cum itaque. Magnam quasi aut quod deleniti odit dolores dolorem quas.','\"https://via.placeholder.com/640x480.png/0011aa?text=aut\"','Waelchi Group');
+INSERT INTO `products` VALUES (5,'2024-01-12 03:15:11','2024-01-12 03:15:11','https://www.murphy.com/modi-est-quis-quisquam','sunt','667','esse','Perspiciatis expedita fugit soluta et. Nemo ad aliquid doloremque doloribus asperiores sunt dolores. Rem at similique et.','\"https://via.placeholder.com/640x480.png/00dd88?text=quo\"','Rowe, Koch and Sanford');
+INSERT INTO `products` VALUES (6,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://haley.com/nisi-ipsa-perferendis-tempore-ut-libero-fugiat-eaque','qui','136','sint','Et ipsum quia magni tenetur. Rerum iure voluptas quas aut voluptates recusandae eligendi. Odio quia quis nemo magni voluptatibus in facere.','\"https://via.placeholder.com/640x480.png/006699?text=sunt\"','Glover, Emard and Torp');
+INSERT INTO `products` VALUES (7,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://www.schinner.net/ut-porro-vero-occaecati','non','827','distinctio','Animi alias dignissimos sit maiores amet accusamus porro non. Sequi explicabo beatae dicta quaerat sunt quibusdam. Rem exercitationem ipsum sunt voluptatem a nobis. Error aut delectus facilis.','\"https://via.placeholder.com/640x480.png/00ff11?text=perspiciatis\"','Murray Ltd');
+INSERT INTO `products` VALUES (8,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://boyer.com/sunt-ut-non-ducimus.html','sed','756','adipisci','Architecto minus voluptatem alias maxime ducimus reprehenderit. Consequuntur eum at sint distinctio. Dolore cumque aut labore id.','\"https://via.placeholder.com/640x480.png/002211?text=maiores\"','Bergnaum-Kulas');
+INSERT INTO `products` VALUES (9,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://torp.com/ad-molestiae-perspiciatis-aliquid-aperiam-laboriosam-assumenda','iusto','267','in','Blanditiis temporibus voluptas vitae alias. Qui nihil exercitationem doloribus placeat perferendis harum voluptatem omnis. Dolorem placeat esse distinctio explicabo incidunt.','\"https://via.placeholder.com/640x480.png/0088dd?text=aut\"','Kiehn Group');
+INSERT INTO `products` VALUES (10,'2024-01-12 03:15:11','2024-01-12 03:15:11','http://www.krajcik.com/corporis-eos-ipsam-et-aspernatur.html','nostrum','751','adipisci','Ratione ut sequi perferendis magni. Amet dolore cupiditate enim recusandae beatae vero aperiam quae. Dolore quasi delectus est voluptatem eum. Veritatis sed possimus aliquam in.','\"https://via.placeholder.com/640x480.png/0055ee?text=est\"','Orn, Dietrich and Nolan');
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -148,9 +224,11 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `roles` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,17 +237,22 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Hoyt Towne','keyshawn71@example.net','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'OXn36JIUye','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (2,'Delphine Hudson PhD','bins.dayna@example.net','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'oflzdHhAsN','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (3,'Dr. Abigale Bednar Jr.','sruecker@example.net','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'8kTqEyoGbw','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (4,'Dr. Connor Bahringer','violette50@example.net','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'rS6CTVSDTu','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (5,'Stephania Cassin','kdare@example.net','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'K9nl9HLNfj','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (6,'Dr. Johanna Keebler I','rico.bashirian@example.com','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'fyGHEdaEil','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (7,'Jonathan Turcotte','kromaguera@example.com','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'VSPLvQANtT','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (8,'Lonny Kub','dayana.abshire@example.net','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'EU5mSsoPGP','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (9,'Annabel Hauck DVM','geraldine54@example.net','2024-01-11 04:40:40','$2y$10$wSxDSO.1a6TvGw/qJ4RKtO3uanJCzoJZL2Gq6OMDi0nxbmQqGcah.',NULL,NULL,NULL,'yojEBOPRj6','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (10,'Admin Indra','indra953@gmail.com','2024-01-11 04:40:40','$2y$10$J5T/JkX9yj9wsFqKHgrc7eefA.ne9am8S5vR5jw/.D52AtaW8E0Q6',NULL,NULL,NULL,'qTlnXM8xPVUgyN3EUb75rdqmC8e2vfAnsA2ALcyAWvYhCqgHDO8eq9xgMYkk','2024-01-11 04:40:40','2024-01-11 04:40:40');
-INSERT INTO `users` VALUES (11,'test_register','test@register.com',NULL,'$2y$10$/mRbq9K2q/0BWFUW8pTI1.6NljCilZaIG1c3qxylp4UmokMlF4l8e',NULL,NULL,NULL,NULL,'2024-01-11 05:08:40','2024-01-11 05:08:40');
+INSERT INTO `users` VALUES (1,'Moshe Cassin','jmorissette@example.org','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'F5M3oFBVIt','2024-01-12 03:15:11','2024-01-12 03:15:11','(660) 779-1331','USER');
+INSERT INTO `users` VALUES (2,'Travon Treutel','aufderhar.quinn@example.org','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'JXAgtki5yM','2024-01-12 03:15:11','2024-01-12 03:15:11','1-762-894-5041','STAFF');
+INSERT INTO `users` VALUES (3,'Ella Hagenes','pfeffer.sigurd@example.net','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'Xpt4jfqrsG','2024-01-12 03:15:11','2024-01-12 03:15:11','+1.737.552.6379','ADMIN');
+INSERT INTO `users` VALUES (4,'Micheal Botsford','frederick15@example.com','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'ebxcgVUtoI','2024-01-12 03:15:11','2024-01-12 03:15:11','+1.917.530.9509','ADMIN');
+INSERT INTO `users` VALUES (5,'Dr. Shaina Renner','walsh.addie@example.com','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'QmTwDwxXde','2024-01-12 03:15:11','2024-01-12 03:15:11','701-930-1318','USER');
+INSERT INTO `users` VALUES (6,'Prof. Marc Marquardt','garrett36@example.net','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'TkGCiiwAMG','2024-01-12 03:15:11','2024-01-12 03:15:11','+1-917-496-8951','ADMIN');
+INSERT INTO `users` VALUES (7,'Petra Jacobs','margarita00@example.org','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'CZTZjxrV94','2024-01-12 03:15:11','2024-01-12 03:15:11','718-362-7849','ADMIN');
+INSERT INTO `users` VALUES (8,'Forrest Konopelski','caufderhar@example.com','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'W5yyY4hKuK','2024-01-12 03:15:11','2024-01-12 03:15:11','651-580-6220','USER');
+INSERT INTO `users` VALUES (9,'Meta Heller','pearl.gusikowski@example.com','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'GkSC0nD15m','2024-01-12 03:15:11','2024-01-12 03:15:11','+1-475-478-4027','ADMIN');
+INSERT INTO `users` VALUES (10,'Camilla Schumm PhD','lkassulke@example.com','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'6lLMk2lHnr','2024-01-12 03:15:11','2024-01-12 03:15:11','+1.615.704.2206','STAFF');
+INSERT INTO `users` VALUES (11,'Jaylen Zieme','nichole73@example.org','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'Oq1Skeanss','2024-01-12 03:15:11','2024-01-12 03:15:11','207.384.5532','STAFF');
+INSERT INTO `users` VALUES (12,'Jewel Turner','alexzander.gaylord@example.org','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'KZTflfo60U','2024-01-12 03:15:11','2024-01-12 03:15:11','+16266484220','USER');
+INSERT INTO `users` VALUES (13,'Miss Caroline Senger II','mavis64@example.org','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'nG33EZ4WQa','2024-01-12 03:15:11','2024-01-12 03:15:11','+1.540.936.3071','ADMIN');
+INSERT INTO `users` VALUES (14,'Prof. Norberto Vandervort','hilpert.madisyn@example.net','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'IqXMupPh49','2024-01-12 03:15:11','2024-01-12 03:15:11','+1-781-215-9695','USER');
+INSERT INTO `users` VALUES (15,'Arvilla Hessel PhD','boyle.clarabelle@example.net','2024-01-12 03:15:11','$2y$10$pZlRS8Js5V8iyC.qVquVuOe/WbkJzfH2VG6D4ZuzPH5.eHEulUfQC',NULL,NULL,NULL,'vbJkcjIuTj','2024-01-12 03:15:11','2024-01-12 03:15:11','312-852-2338','ADMIN');
+INSERT INTO `users` VALUES (16,'Admin indra','indra953@gmail.com','2024-01-12 03:15:11','$2y$10$gqy.1eb9Rnza5RBvi5Qgo.w/CJxcyLYOjS1B/VbMhaST.JtKgWD2e',NULL,NULL,NULL,'2p6gRBFHcE','2024-01-12 03:15:11','2024-01-12 03:15:11','08123456789','ADMIN');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -182,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-11 19:58:17
+-- Dump completed on 2024-01-12 19:45:28

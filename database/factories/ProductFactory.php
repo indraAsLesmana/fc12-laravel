@@ -18,12 +18,13 @@ class ProductFactory extends Factory
     {
         return [
             'url' => fake()->url(),
-            'name' => fake()->name(),
+            'name' => fake()->word(),
             'price' => fake()->numberBetween(100, 1000),
             'category' => fake()->word(),
             'description' => fake()->text(),
             'image' => json_encode(fake()->imageUrl()),
             'brand' => fake()->company(),
+            'category_id' => fake()->numberBetween(1, 5),
         ];
     }
 }

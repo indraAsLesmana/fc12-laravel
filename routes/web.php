@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Fortify;
@@ -27,12 +29,16 @@ Route::middleware(['auth'])->group(function() {
     })->name('home');
 
     Route::resource('user', UserController::class);
+    //category
+    Route::resource('category', CategoryController::class);
+    //product
+    Route::resource('product', ProductController::class);
 });
 
 // Dashboard
-// Route::get('/dashboard-general-dashboard', function () {
-//     return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
-// });
+Route::get('/dashboard-general-dashboard', function () {
+    return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
+});
 // Route::get('/dashboard-ecommerce-dashboard', function () {
 //     return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 // });
