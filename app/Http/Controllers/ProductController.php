@@ -79,6 +79,10 @@ class ProductController extends Controller
      */
     public function sync()
     {
+        // if total product have 100 row than stop hitting api.
+        if (Product::count() >= 117) {
+            return;
+        }
 
         $key = ['Fruits', 'Leafy', 'vinecrops', 'Herbs', 'Microgreen'];
         $client = new Client();
@@ -92,10 +96,6 @@ class ProductController extends Controller
         // Log::debug('Content: ' . json_encode($content, JSON_PRETTY_PRINT));
 
         foreach ($content as $item) {
-            // if total product have 100 row than return
-            if (Product::count() >= 115) {
-                return;
-            }
             $product = Product::where('product_id', $item['id'])->first();
             if (!$product) {
                 $product = new Product();
