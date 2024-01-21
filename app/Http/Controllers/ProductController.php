@@ -75,13 +75,14 @@ class ProductController extends Controller
     /**
      * Sync product
      * hit this api -> http://192.168.2.31:5000/api/tab_content?key=Fruits
+     * hit this api -> http://fc12-groccery-service.asianpower.store/api/tab_content?key=Fruits
      */
     public function sync()
     {
 
         $key = ['Fruits', 'Leafy', 'vinecrops', 'Herbs', 'Microgreen'];
         $client = new Client();
-        $url = "http://192.168.2.31:5000/api/tab_content?key=". $key[rand(0,4)];
+        $url = "http://fc12-groccery-service.asianpower.store/api/tab_content?key=". $key[rand(0,4)];
         $options = [
             'auth' => ['indra', 'indra'],
         ];
