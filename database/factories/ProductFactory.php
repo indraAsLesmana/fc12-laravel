@@ -20,11 +20,12 @@ class ProductFactory extends Factory
             'url' => fake()->url(),
             'name' => fake()->word(),
             'price' => fake()->numberBetween(100, 1000),
-            'category' => fake()->word(),
+            'category' => fake()->randomElement(['Leafy', 'vine crops', 'Fruits', 'Herbs', 'Microgreen']),
             'description' => fake()->text(),
             'image' => json_encode(fake()->imageUrl()),
             'brand' => fake()->company(),
-            'category_id' => fake()->numberBetween(1, 5),
+            // 'category_id' => fake()->numberBetween(1, 5),
+            'product_id' => fake()->numberBetween(5044360812676, 5144360812676),
         ];
     }
 }

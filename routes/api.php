@@ -35,3 +35,7 @@ Route::get('/categories', [CategoryController::class, 'index']);
 
 //Product
 Route::get('/products', [ProductController::class, 'index']);
+
+//Product sync
+// Route::get('/sync', [ProductController::class, 'sync']);
+

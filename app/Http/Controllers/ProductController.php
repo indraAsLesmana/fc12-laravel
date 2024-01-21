@@ -6,6 +6,8 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -14,6 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $this->sync();
+
         $products = Product::paginate(10);
         return view('pages.product.index', compact('products'));
     }
@@ -66,5 +70,37 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    /**
+     * Sync product
+     * hit this api -> http://192.168.2.31:5000/api/tab_content?key=Fruits
+     */
+    public function sync()
+    {
+        $client = new Client();
+        $url = "http://192.168.2.31:5000/api/tab_content?key=Fruits";
+        $options = [
+            'auth' => ['indra', 'indra'],
+        ];
+        $response = $client->request('GET', $url, $options);
+        $content = $response->getBody()->getContents();
+        $content = json_decode($content, true);
+        Log::debug('Content: ' . json_encode($content, JSON_PRETTY_PRINT));
+        foreach ($content as $item) {
+            $product = Product::where('product_id', $item['id'])->first();
+            if (!$product) {
+                $product = new Product();
+            }
+            $product->name = $item['name'];
+            $product->price = $item['price'];
+            $product->description = $item['Description'];
+            $product->image = $item['image'];
+            $product->url = $item['url'];
+            $product->brand = $item['brand'];
+            $product->category_id = $item['Category'];
+
+            $product->save();
+        }
     }
 }

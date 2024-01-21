@@ -33,7 +33,6 @@
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
-
                             <div class="card-body">
 
                                 <div class="float-right">
@@ -46,6 +45,11 @@
                                         </div>
                                     </form>
                                 </div>
+
+                                {{-- <div class="sync-product">
+                                    <form method="GET" action="{{ route('product.sync') }}">
+                                    <button class="btn btn-primary"><i class="fas fa-sync"></i></button>
+                                </div> --}}
 
                                 <div class="clearfix mb-3"></div>
 

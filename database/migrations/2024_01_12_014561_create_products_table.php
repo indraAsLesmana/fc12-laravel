@@ -18,12 +18,18 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->string('name')->nullable();
             $table->string('price')->nullable();
-            $table->string('category')->nullable();
+            $table->string('product_id')->nullable();
             $table->string('description')->nullable();
-
             $table->json('image')->nullable();
             $table->string('brand')->nullable();
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            //$table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+
+            // category is constrained to categories table
+            // $table->foreign('category')->references('name')->on('categories')->onDelete('cascade');
+
+            $table->string('category'); 
+            $table->foreign('category')->references('name')->on('categories')->onDelete('cascade');
+
         });
     }
 
