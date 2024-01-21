@@ -78,28 +78,33 @@ class ProductController extends Controller
      */
     public function sync()
     {
+
+        $key = ['Fruits', 'Leafy', 'vinecrops', 'Herbs', 'Microgreen'];
         $client = new Client();
-        $url = "http://192.168.2.31:5000/api/tab_content?key=Fruits";
+        $url = "http://192.168.2.31:5000/api/tab_content?key=". $key[rand(0,4)];
         $options = [
             'auth' => ['indra', 'indra'],
         ];
         $response = $client->request('GET', $url, $options);
         $content = $response->getBody()->getContents();
         $content = json_decode($content, true);
-        Log::debug('Content: ' . json_encode($content, JSON_PRETTY_PRINT));
+        // Log::debug('Content: ' . json_encode($content, JSON_PRETTY_PRINT));
+
         foreach ($content as $item) {
             $product = Product::where('product_id', $item['id'])->first();
             if (!$product) {
                 $product = new Product();
+                $product->product_id = $item['id'];
+
+                //next improvement update if exists, for now just leave as is
             }
             $product->name = $item['name'];
             $product->price = $item['price'];
             $product->description = $item['Description'];
-            $product->image = $item['image'];
+            $product->image = json_encode($item['image']);
             $product->url = $item['url'];
             $product->brand = $item['brand'];
-            $product->category_id = $item['Category'];
-
+            $product->category = $item['Category'];
             $product->save();
         }
     }

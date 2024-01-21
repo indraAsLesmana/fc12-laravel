@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('price')->nullable();
             $table->string('product_id')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->json('image')->nullable();
             $table->string('brand')->nullable();
             //$table->foreignId('category_id')->constrained('categories')->onDelete('cascade');

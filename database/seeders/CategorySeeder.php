@@ -20,7 +20,7 @@ class CategorySeeder extends Seeder
         ]);
 
         $user = \App\Models\Category::factory()->create([
-            'name' => 'vine crops',
+            'name' => 'vinecrops',
             'description' => 'Vining vegetables like cucumbers, pole beans, and tomatoes can produce huge yields. Learn how to support the vines and grow bumper crops.',
             'image' => 'https://gabbarfarms.com/cdn/shop/files/Vine_Crops.png?v=1627624890',
         ]);
