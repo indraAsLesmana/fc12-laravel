@@ -91,12 +91,14 @@ class ProductController extends Controller
         // Log::debug('Content: ' . json_encode($content, JSON_PRETTY_PRINT));
 
         foreach ($content as $item) {
+            // if total product have 100 row than return
+            if (Product::count() >= 115) {
+                return;
+            }
             $product = Product::where('product_id', $item['id'])->first();
             if (!$product) {
                 $product = new Product();
                 $product->product_id = $item['id'];
-
-                //next improvement update if exists, for now just leave as is
             }
             $product->name = $item['name'];
             $product->price = $item['price'];
