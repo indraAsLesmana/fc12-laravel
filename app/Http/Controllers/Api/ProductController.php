@@ -17,6 +17,10 @@ class ProductController extends Controller
         $products = Product::when($request->category_id, function ($query) use ($request) {
             return $query->where('category_id', $request->category_id);
         })->paginate(10);
+        // make image from product is array string
+        $products->each(function ($product) {
+            $product->image = json_decode($product->image, true);
+        });
 
         return response()->json([
             'message' => 'Success',
