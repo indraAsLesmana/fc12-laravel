@@ -8,17 +8,25 @@ use App\Models\Category;
 use App\Models\Product;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->sync();
 
-        $products = Product::paginate(10);
+        // $products = Product::paginate(10);
+        // return view('pages.product.index', compact('products'));
+
+        //get users with pagination
+        $products = DB::table('products')
+            ->where('name', 'like', '%' . $request->search . '%')
+            ->paginate(10);
         return view('pages.product.index', compact('products'));
     }
 
