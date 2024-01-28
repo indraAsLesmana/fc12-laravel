@@ -91,35 +91,37 @@ class ProductController extends Controller
     public function sync()
     {
         // if total product have 100 row than stop hitting api.
-        if (Product::count() >= 117) {
-            return;
-        }
+        // if (Product::count() >= 117) {
+        //     return;
+        // }
 
         $key = ['Fruits', 'Leafy', 'vinecrops', 'Herbs', 'Microgreen'];
         $client = new Client();
-        $url = "http://fc12-groccery-service.asianpower.store/api/tab_content?key=". $key[rand(0,4)];
         $options = [
             'auth' => ['indra', 'indra'],
         ];
-        $response = $client->request('GET', $url, $options);
-        $content = $response->getBody()->getContents();
-        $content = json_decode($content, true);
-        // Log::debug('Content: ' . json_encode($content, JSON_PRETTY_PRINT));
-
-        foreach ($content as $item) {
-            $product = Product::where('product_id', $item['id'])->first();
-            if (!$product) {
-                $product = new Product();
-                $product->product_id = $item['id'];
+        foreach ($key as $k) {
+            $url = "http://fc12-groccery-service.asianpower.store/api/tab_content?key=". $k;
+            $response = $client->request('GET', $url, $options);
+            $content = $response->getBody()->getContents();
+            $content = json_decode($content, true);
+    
+            foreach ($content as $item) {
+                $product = Product::where('product_id', $item['id'])->first();
+                if (!$product) {
+                    $product = new Product();
+                    $product->product_id = $item['id'];
+                }
+                $product->name = $item['name'];
+                $product->price = $item['price'];
+                $product->description = $item['Description'];
+                $product->image = json_encode($item['image']);
+                $product->url = $item['url'];
+                $product->brand = $item['brand'];
+                $product->category = $item['Category'];
+                $product->save();
             }
-            $product->name = $item['name'];
-            $product->price = $item['price'];
-            $product->description = $item['Description'];
-            $product->image = json_encode($item['image']);
-            $product->url = $item['url'];
-            $product->brand = $item['brand'];
-            $product->category = $item['Category'];
-            $product->save();
         }
+        
     }
 }
