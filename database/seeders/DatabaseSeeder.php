@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
-            // ProductSeeder::class -> all product will seed by python API.
+            AddressSeeder::class,
+            // Product sync by API, no need to seed
+            // ProductSeeder::class,
         ]);
     }
 }

@@ -5,15 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(10);
+        // $categories = Category::paginate(10);
+        // return view('pages.category.index', compact('categories'));
+
+        //get users with pagination
+        $categories = DB::table('categories')
+        ->where('name', 'like', '%' . $request->search . '%')
+            ->paginate(10);
+
         return view('pages.category.index', compact('categories'));
     }
 

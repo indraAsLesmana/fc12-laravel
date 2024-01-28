@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
-        \App\Models\User::factory(15)->create();
+        \App\Models\User::factory(9)->create();
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin indra',

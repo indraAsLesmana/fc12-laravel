@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'url' => fake()->url(),
             'name' => fake()->word(),
             'price' => fake()->numberBetween(100, 1000),
-            'category' => fake()->randomElement(['Leafy', 'vine crops', 'Fruits', 'Herbs', 'Microgreen']),
+            'category' => fake()->randomElement(['Leafy', 'vinecrops', 'Fruits', 'Herbs', 'Microgreen']),
             'description' => fake()->text(),
             'image' => json_encode(fake()->imageUrl()),
             'brand' => fake()->company(),
