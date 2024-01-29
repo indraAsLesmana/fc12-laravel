@@ -9,10 +9,20 @@ class AddressController extends Controller
 {
     public function index(Request $request) {
         // automaticly get address by user
+        // return response()->json([
+        //     'message' => 'Success',
+        //     'data' => $request->user()->address
+        // ], 200);
+
         return response()->json([
             'message' => 'Success',
-            'data' => $request->user()->address
+            'data' => $request->user()->address->map(function ($address) {
+                return [
+                    'is_default' => (bool) $address->is_default,
+                ];
+            })
         ], 200);
+        
     }
     
     // public function index(Request $request)
