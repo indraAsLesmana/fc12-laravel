@@ -90,10 +90,10 @@ class ProductController extends Controller
      */
     public function sync()
     {
-        // if total product have 100 row than stop hitting api.
-        // if (Product::count() >= 117) {
-        //     return;
-        // }
+        
+        if (!empty(Product::all())) {
+            return;
+        }
 
         $key = ['Fruits', 'Leafy', 'vinecrops', 'Herbs', 'Microgreen'];
         $client = new Client();
