@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,7 @@ Route::get('/products', [ProductController::class, 'index']);
 
 //Product sync
 // Route::get('/sync', [ProductController::class, 'sync']);
+
+//address
+Route::get('/address', [AddressController::class, 'index'])->middleware('auth:sanctum');
 
