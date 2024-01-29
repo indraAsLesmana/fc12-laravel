@@ -89,9 +89,9 @@ class ProductController extends Controller
      * hit this api -> http://fc12-groccery-service.asianpower.store/api/tab_content?key=Fruits
      */
     public function sync()
-    {
-        
-        if (!empty(Product::all())) {
+    {   
+        // if not empty just cancel the sync.
+        if (Product::count() > 0) {
             return;
         }
 
