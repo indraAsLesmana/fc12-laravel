@@ -9,33 +9,20 @@ class AddressController extends Controller
 {
     public function index(Request $request) {
         // automaticly get address by user
-        // return response()->json([
-        //     'message' => 'Success',
-        //     'data' => $request->user()->address
-        // ], 200);
-
         return response()->json([
             'message' => 'Success',
-            'data' => $request->user()->address->map(function ($address) {
-                return [
-                    'is_default' => (bool) $address->is_default,
-                ];
-            })
+            'data' => $request->user()->address
         ], 200);
-        
-    }
-    
-    // public function index(Request $request)
-    // {
-    //     $userId = $request->input('user_id', $request->user()->id); // Get the user_id from the request or use the authenticated user's id
-    //     $user = User::findOrFail($userId); // Retrieve the user based on the user_id
-    //     $addresses = $user->address; // Retrieve the addresses associated with the user
 
-    //     return response()->json([
-    //         'message' => 'Success',
-    //         'data' => $addresses
-    //     ], 200);
-    // }
+        // return response()->json([
+        //     'message' => 'Success',
+        //     'data' => $request->user()->address->map(function ($address) {
+        //         return [
+        //             'is_default' => (bool) $address->is_default,
+        //         ];
+        //     })
+        // ], 200);
+    }
 
     public function store(Request $request) {
         $request->validate([
