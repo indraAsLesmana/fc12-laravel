@@ -26,4 +26,31 @@ class AddressController extends Controller
     //         'data' => $addresses
     //     ], 200);
     // }
+
+    public function store(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'full_address' => 'required',
+            'phone' => 'required',
+            'prov_id' => 'required',
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'postal_code' => 'required',
+            'is_default' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        // make user all address only have one is_default true, another address else must be false
+        $address = $request->user()->address()->where('is_default', true)->first();
+        if ($address) {
+            $address->is_default = false;
+            $address->save();
+        }
+        
+        $address = $request->user()->address()->create($request->all());
+        return response()->json([
+            'message' => 'Success',
+            'data' => $address
+        ], 200);
+    }
 }

@@ -43,3 +43,5 @@ Route::get('/products', [ProductController::class, 'index']);
 //address
 Route::get('/address', [AddressController::class, 'index'])->middleware('auth:sanctum');
 
+//post address
+Route::post('/address', [AddressController::class, 'store'])->middleware('auth:sanctum');
