@@ -33,8 +33,7 @@ class AddressController extends Controller
             'city_id' => 'required',
             'district_id' => 'required',
             'postal_code' => 'required',
-            'is_default' => 'required',
-            'user_id' => 'required',
+            'is_default' => 'required'
         ]);
 
         // make user all address only have one is_default true, another address else must be false
@@ -43,6 +42,9 @@ class AddressController extends Controller
             $address->is_default = false;
             $address->save();
         }
+        
+        // insert address user_id by logged user
+        $address->user_id = $request->user()->id;
         
         $address = $request->user()->address()->create($request->all());
         return response()->json([
