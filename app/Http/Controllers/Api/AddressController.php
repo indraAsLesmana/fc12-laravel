@@ -36,20 +36,19 @@ class AddressController extends Controller
             'is_default' => 'required'
         ]);
 
-        // make user all address only have one is_default true, another address else must be false
-        $address = $request->user()->address()->where('is_default', true)->first();
-        if ($address) {
-            $address->is_default = false;
-            $address->save();
+        $user = $request->user();
+
+        // Set all existing addresses' is_default to false if the new address is default
+        if ($request->is_default) {
+            $user->address()->update(['is_default' => false]);
         }
-        
-        // insert address user_id by logged user
-        $address->user_id = $request->user()->id;
-        
-        $address = $request->user()->address()->create($request->all());
+
+        // Create a new address with the user_id
+        $address = $user->address()->create($request->all());
+
         return response()->json([
             'message' => 'Success',
             'data' => $address
-        ], 200);
+        ], 201);
     }
 }
