@@ -16,7 +16,11 @@ return new class extends Migration
             // order_id
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             // product_id
-            $table->foreignId('product_id')->constrained('products', 'product_id')->onDelete('cascade');
+            // $table->foreignId('product_id')->constrained('products', 'product_id')->onDelete('cascade');
+
+            // Add the product_id column
+            $table->string('product_id')->unique();
+            $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
             // quantity
             $table->integer('quantity');
 
