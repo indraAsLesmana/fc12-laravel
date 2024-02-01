@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->string('name')->nullable();
             $table->string('price')->nullable();
-            $table->string('product_id')->nullable();
+            $table->string('product_id');
             $table->text('description')->nullable();
             $table->json('image')->nullable();
             $table->string('brand')->nullable();

@@ -140,7 +140,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,81 @@ INSERT INTO `migrations` VALUES (6,'2024_01_11_211621_add_roles_and_phone',1);
 INSERT INTO `migrations` VALUES (7,'2024_01_12_014560_create_categories_table',1);
 INSERT INTO `migrations` VALUES (8,'2024_01_12_014561_create_products_table',1);
 INSERT INTO `migrations` VALUES (9,'2024_01_28_133529_address',1);
+INSERT INTO `migrations` VALUES (12,'2024_01_31_225358_create_orders_table',2);
+INSERT INTO `migrations` VALUES (13,'2024_01_31_225417_create_order_items_table',2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_items`
+--
+
+DROP TABLE IF EXISTS `order_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `order_items` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) unsigned NOT NULL,
+  `product_id` bigint(20) unsigned NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_items_order_id_foreign` (`order_id`),
+  KEY `order_items_product_id_foreign` (`product_id`),
+  CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_items`
+--
+
+LOCK TABLES `order_items` WRITE;
+/*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `orders` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `address_id` bigint(20) unsigned NOT NULL,
+  `subtotal` int(11) NOT NULL,
+  `shipping_cost` int(11) NOT NULL,
+  `total_cost` int(11) NOT NULL,
+  `status` enum('pending','paid','on_delivery','delivered','expired','canceled') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_method` enum('bank_transfer','ewallet') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_va_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_va_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_ewallet` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_resi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `transaction_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders_user_id_foreign` (`user_id`),
+  KEY `orders_address_id_foreign` (`address_id`),
+  CONSTRAINT `orders_address_id_foreign` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -206,7 +280,7 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,6 +296,10 @@ INSERT INTO `personal_access_tokens` VALUES (4,'App\\Models\\User',10,'auth_toke
 INSERT INTO `personal_access_tokens` VALUES (5,'App\\Models\\User',10,'auth_token','908a9bd4f6773de10f27e3762eb2179951129b9d13594a7f58444d075676fa98','[\"*\"]','2024-01-30 18:06:19',NULL,'2024-01-30 18:05:35','2024-01-30 18:06:19');
 INSERT INTO `personal_access_tokens` VALUES (6,'App\\Models\\User',10,'auth_token','2e944f13b140e83db23e647861eec4453e32714377a725514fa937825c65722a','[\"*\"]','2024-01-30 18:13:21',NULL,'2024-01-30 18:12:18','2024-01-30 18:13:21');
 INSERT INTO `personal_access_tokens` VALUES (7,'App\\Models\\User',10,'auth_token','d5dc6041bfc3776211a6a0e920ea8724bcc8d01c26bc7c5853e6271dbcba1bf8','[\"*\"]','2024-01-30 18:55:15',NULL,'2024-01-30 18:54:46','2024-01-30 18:55:15');
+INSERT INTO `personal_access_tokens` VALUES (8,'App\\Models\\User',11,'auth_token','f9ac5bf446a1f9b2d6e160890fd7c2c423482172d31d42aed4f28236d023cd66','[\"*\"]','2024-02-01 04:32:36',NULL,'2024-02-01 03:37:00','2024-02-01 04:32:36');
+INSERT INTO `personal_access_tokens` VALUES (9,'App\\Models\\User',11,'auth_token','8d4515829c239dcf865e7014f304405500b04f22a01f3700ec82099779e6d728','[\"*\"]','2024-02-01 04:36:26',NULL,'2024-02-01 04:33:59','2024-02-01 04:36:26');
+INSERT INTO `personal_access_tokens` VALUES (10,'App\\Models\\User',11,'auth_token','7091b078dd10c5129d412bbca933f681e31ad9b0efd3477f5beb73a4144dbe5b','[\"*\"]',NULL,NULL,'2024-02-01 04:43:13','2024-02-01 04:43:13');
+INSERT INTO `personal_access_tokens` VALUES (11,'App\\Models\\User',11,'auth_token','32e80b79c66c5eced90bb1ed4bbd9aae45d00dda2bf78180f746f57705a8948e','[\"*\"]','2024-02-01 04:45:03',NULL,'2024-02-01 04:43:21','2024-02-01 04:45:03');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -431,4 +509,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-01  7:16:48
+-- Dump completed on 2024-02-01 21:16:07

@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\CallbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +47,9 @@ Route::get('/address', [AddressController::class, 'index'])->middleware('auth:sa
 
 //post address
 Route::post('/address', [AddressController::class, 'store'])->middleware('auth:sanctum');
+
+//order
+Route::post('/order', [OrderController::class, 'order'])->middleware('auth:sanctum');
+
+//callback
+Route::post('/callback', [CallbackController::class, 'callback']);

@@ -17,6 +17,7 @@ class Product extends Model
         'image',
         'brand',
         'category',
+        'product_id',
     ];
 
     //category

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Fortify;
 
@@ -33,6 +34,8 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('category', CategoryController::class);
     //product
     Route::resource('product', ProductController::class);
+    //order
+    Route::resource('order', OrderController::class);
 });
 
 // Dashboard
