@@ -23,7 +23,9 @@ class CreateVAService extends Midtrans
         foreach ($this->order->orderItems as $orderItem) {
             $itemDetails[] = [
                 'id' => $orderItem->product->id,
-                'price' => $orderItem->product->price,
+                
+                // 'price' => $orderItem->product->price,
+                'price' => floatval(str_replace('Rs.', '', $orderItem->product->price)),
                 'quantity' => $orderItem->quantity,
                 'name' => $orderItem->product->name,
             ];
