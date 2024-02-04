@@ -20,7 +20,7 @@ class OrderController extends Controller
             'payment_method' => 'required',
             'shipping_service' => 'required',
             'shipping_cost' => 'required',
-            'total_cost' => 'required',
+            // 'total_cost' => 'required',
             'items' => 'required',
         ]);
 
@@ -71,6 +71,15 @@ class OrderController extends Controller
         // return response
         return response()->json([
             'message' => 'Order created successfully',
+            'order' => $order,
+        ]);
+    }
+
+    // get Order by id
+    public function getOrder($id)
+    {
+        $order = Order::with('orderItems.product')->find($id);
+        return response()->json([
             'order' => $order,
         ]);
     }

@@ -53,3 +53,6 @@ Route::post('/order', [OrderController::class, 'order'])->middleware('auth:sanct
 
 //callback
 Route::post('/callback', [CallbackController::class, 'callback']);
+
+//getOrder
+Route::get('/order/{id}', [OrderController::class, 'getOrder'])->middleware('auth:sanctum');
