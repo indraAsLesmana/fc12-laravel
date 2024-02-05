@@ -45,14 +45,12 @@ class OrderController extends Controller
             'transaction_number' => 'TRX' . rand(100000, 999999),
         ]);
 
-        //if payment_va_name and payment_va_number is not null
         if ($request->payment_va_name) {
             $order->update([
                 'payment_va_name' => $request->payment_va_name,
             ]);
         }
 
-        // create order items
         foreach ($request->items as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -61,14 +59,13 @@ class OrderController extends Controller
             ]);
         }
 
-        // request ke midtrans
+        //va request to midtrans service 
         $midtrans = new CreateVAService($order->load('user', 'orderItems'));
         $apiResponse = $midtrans->getVA();
 
         $order->payment_va_number = $apiResponse->va_numbers[0]->va_number;
         $order->save();
 
-        // return response
         return response()->json([
             'message' => 'Order created successfully',
             'order' => $order,
@@ -81,6 +78,6 @@ class OrderController extends Controller
         $order = Order::with('orderItems.product')->find($id);
         return response()->json([
             'order' => $order,
-        ]);
+        ], 200);
     }
 }
