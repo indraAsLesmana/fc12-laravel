@@ -72,12 +72,22 @@ class OrderController extends Controller
         ]);
     }
 
-    // get Order by id
+    // get Order by order_id
     public function getOrder($id)
     {
         $order = Order::with('orderItems.product')->find($id);
         return response()->json([
             'order' => $order,
         ], 200);
+    }
+
+    // // get all order by user
+    public function getOrders()
+    {
+        $orders = Order::with('orderItems.product')->where('user_id', auth()->user()->id)->get();
+        return response()->json([
+            'orders' => $orders,
+        ], 200);
+        
     }
 }

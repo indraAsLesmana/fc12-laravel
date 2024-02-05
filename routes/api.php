@@ -56,3 +56,9 @@ Route::post('/callback', [CallbackController::class, 'callback']);
 
 //getOrder
 Route::get('/order/{id}', [OrderController::class, 'getOrder'])->middleware('auth:sanctum');
+
+//getAllUserOrder
+Route::get('/orders', [OrderController::class, 'getOrders'])->middleware('auth:sanctum');
+
+//update fcm_id
+Route::post('/update-fcmid', [AuthController::class, 'updateFcmId'])->middleware('auth:sanctum');
