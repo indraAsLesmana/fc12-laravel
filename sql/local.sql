@@ -137,7 +137,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,6 +157,7 @@ INSERT INTO `migrations` VALUES (8,'2024_01_12_014561_create_products_table',1);
 INSERT INTO `migrations` VALUES (9,'2024_01_28_133529_address',1);
 INSERT INTO `migrations` VALUES (10,'2024_01_31_225358_create_orders_table',1);
 INSERT INTO `migrations` VALUES (11,'2024_01_31_225418_create_order_items_table',1);
+INSERT INTO `migrations` VALUES (12,'2024_02_05_135136_add_fcmid_to_table_users',2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +180,7 @@ CREATE TABLE `order_items` (
   KEY `order_items_product_id_foreign` (`product_id`),
   CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
   CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,6 +268,8 @@ INSERT INTO `order_items` VALUES (94,45,'6594786459780',1,'2024-02-04 22:49:48',
 INSERT INTO `order_items` VALUES (95,45,'6609882054788',1,'2024-02-04 22:49:48','2024-02-04 22:49:48');
 INSERT INTO `order_items` VALUES (96,46,'6594786459780',1,'2024-02-04 22:50:06','2024-02-04 22:50:06');
 INSERT INTO `order_items` VALUES (97,46,'6609882054788',1,'2024-02-04 22:50:06','2024-02-04 22:50:06');
+INSERT INTO `order_items` VALUES (98,47,'6609882054788',2,'2024-02-06 07:09:05','2024-02-06 07:09:05');
+INSERT INTO `order_items` VALUES (99,48,'6609882054788',2,'2024-02-06 23:06:03','2024-02-06 23:06:03');
 /*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,7 +302,7 @@ CREATE TABLE `orders` (
   KEY `orders_address_id_foreign` (`address_id`),
   CONSTRAINT `orders_address_id_foreign` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE CASCADE,
   CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,6 +348,8 @@ INSERT INTO `orders` VALUES (43,10,12,321,33000,33321,'pending','bank_transfer',
 INSERT INTO `orders` VALUES (44,10,12,162,33000,33162,'pending','bank_transfer','bca','93076263779',NULL,'jne',NULL,'TRX111926','2024-02-04 22:47:37','2024-02-04 22:47:39');
 INSERT INTO `orders` VALUES (45,10,12,161,22000,22161,'pending','bank_transfer','bca',NULL,NULL,'jne',NULL,'TRX729578','2024-02-04 22:49:48','2024-02-04 22:49:48');
 INSERT INTO `orders` VALUES (46,10,12,161,22000,22161,'paid','bank_transfer','bri','930765138769507465',NULL,'jne',NULL,'TRX327093','2024-02-04 22:50:06','2024-02-04 22:50:31');
+INSERT INTO `orders` VALUES (47,10,12,320,22000,22320,'on_delivery','bank_transfer','bca','93076768566',NULL,'jne','ft43555555','TRX569724','2024-02-06 07:09:05','2024-02-06 07:09:07');
+INSERT INTO `orders` VALUES (48,10,12,320,22000,22320,'paid','bank_transfer','bca','93076177402',NULL,'jne',NULL,'TRX752745','2024-02-06 23:06:03','2024-02-06 23:07:33');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,7 +398,7 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,6 +411,15 @@ INSERT INTO `personal_access_tokens` VALUES (3,'App\\Models\\User',10,'auth_toke
 INSERT INTO `personal_access_tokens` VALUES (4,'App\\Models\\User',10,'auth_token','dd4abaf3352e676d988ac5bd5c8a45ab257f64bbb671190e1da26b48c9c2b3a7','[\"*\"]',NULL,NULL,'2024-02-04 15:25:24','2024-02-04 15:25:24');
 INSERT INTO `personal_access_tokens` VALUES (5,'App\\Models\\User',10,'auth_token','854df9a4efb810439699c3cd0fe1bee2640d4ff81671a29fdb2bffbafeb280f0','[\"*\"]','2024-02-04 15:33:38',NULL,'2024-02-04 15:27:32','2024-02-04 15:33:38');
 INSERT INTO `personal_access_tokens` VALUES (6,'App\\Models\\User',10,'auth_token','15db33010819e19741f7b0f0fb5a1f8aff24196fe71215d9bfce8876ecf174d5','[\"*\"]','2024-02-05 03:14:22',NULL,'2024-02-05 02:13:29','2024-02-05 03:14:22');
+INSERT INTO `personal_access_tokens` VALUES (7,'App\\Models\\User',10,'auth_token','85d309730fb0971a5cdb6cd5a5b905e7437c924503381ca388be0f787dd7759c','[\"*\"]',NULL,NULL,'2024-02-05 14:48:29','2024-02-05 14:48:29');
+INSERT INTO `personal_access_tokens` VALUES (8,'App\\Models\\User',10,'auth_token','bf99a38ef7e23678dd45e65abbde4079f378c42c92601c9e3a67378ec8ba7f39','[\"*\"]',NULL,NULL,'2024-02-05 14:50:16','2024-02-05 14:50:16');
+INSERT INTO `personal_access_tokens` VALUES (9,'App\\Models\\User',10,'auth_token','730964697ea214094be01689e86dc649b2c902568cfdfcc25f3f173480d73378','[\"*\"]',NULL,NULL,'2024-02-05 14:53:43','2024-02-05 14:53:43');
+INSERT INTO `personal_access_tokens` VALUES (10,'App\\Models\\User',10,'auth_token','5e626222f7977aeff1676af9fdc35a88d1fc3e101e10236df0d668237bc0107c','[\"*\"]',NULL,NULL,'2024-02-05 14:55:02','2024-02-05 14:55:02');
+INSERT INTO `personal_access_tokens` VALUES (11,'App\\Models\\User',10,'auth_token','8dc3dcdf29086e9b9d134f1317d2591d16a8bb85216deee77a96782e1df22392','[\"*\"]',NULL,NULL,'2024-02-05 14:59:44','2024-02-05 14:59:44');
+INSERT INTO `personal_access_tokens` VALUES (12,'App\\Models\\User',11,'auth_token','7dc763dd0e66b575d1e0300ceceb5d814fab47c5eb2ad9237f38164608a5c18f','[\"*\"]','2024-02-05 15:05:15',NULL,'2024-02-05 15:02:38','2024-02-05 15:05:15');
+INSERT INTO `personal_access_tokens` VALUES (13,'App\\Models\\User',10,'auth_token','ffbaf808c0158a891cebf2fecdf9eb45982ae5d228ec53472e2a0fa5e2aed775','[\"*\"]','2024-02-05 15:08:22',NULL,'2024-02-05 15:06:51','2024-02-05 15:08:22');
+INSERT INTO `personal_access_tokens` VALUES (14,'App\\Models\\User',10,'auth_token','84f928004a2c55725fceb079a89556ab6c2ba24b89c19ece7e0a16ef0f640ab1','[\"*\"]','2024-02-06 07:09:32',NULL,'2024-02-06 07:08:21','2024-02-06 07:09:32');
+INSERT INTO `personal_access_tokens` VALUES (15,'App\\Models\\User',10,'auth_token','d794ba1cc3477dfdf034f3965c9095d3dae45f355260e6706afe23a1c0439753','[\"*\"]','2024-02-06 23:07:34',NULL,'2024-02-06 20:29:11','2024-02-06 23:07:34');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,6 +586,7 @@ CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fcm_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
@@ -593,17 +608,17 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Lolita Spencer','tomas18@example.org','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'lmchFGyW4j','2024-02-03 03:05:26','2024-02-03 03:05:26','+19076312708','USER');
-INSERT INTO `users` VALUES (2,'Carter O\'Hara','wisozk.johnny@example.org','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'EeigOT852M','2024-02-03 03:05:26','2024-02-03 03:05:26','+1-360-203-7879','STAFF');
-INSERT INTO `users` VALUES (3,'Chelsie Mante','schoen.adaline@example.org','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'YHQjkYzbJ9','2024-02-03 03:05:26','2024-02-03 03:05:26','(312) 316-3415','USER');
-INSERT INTO `users` VALUES (4,'Alanis Collins','johnson.keagan@example.net','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'nUQdpkM1SE','2024-02-03 03:05:26','2024-02-03 03:05:26','1-361-639-1575','STAFF');
-INSERT INTO `users` VALUES (5,'Allene Leuschke','maude.klein@example.org','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'PZBBFPMYFn','2024-02-03 03:05:26','2024-02-03 03:05:26','+14195794860','ADMIN');
-INSERT INTO `users` VALUES (6,'Dannie Sauer','reichel.sydnie@example.net','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'cPiURMMADU','2024-02-03 03:05:26','2024-02-03 03:05:26','617.995.6631','ADMIN');
-INSERT INTO `users` VALUES (7,'Jameson Monahan','laila20@example.org','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'vbjDl7KpEy','2024-02-03 03:05:26','2024-02-03 03:05:26','551.231.1152','ADMIN');
-INSERT INTO `users` VALUES (8,'Vicenta Parisian','sunny84@example.org','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'shPHEYkOYv','2024-02-03 03:05:26','2024-02-03 03:05:26','+1 (737) 854-5709','STAFF');
-INSERT INTO `users` VALUES (9,'Thomas Rutherford','norval.ebert@example.org','2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'pEKqovSwHO','2024-02-03 03:05:26','2024-02-03 03:05:26','+1-725-320-0996','USER');
-INSERT INTO `users` VALUES (10,'Admin indra','indra953@gmail.com','2024-02-03 03:05:26','$2y$10$VAELelANVkl1TrpoGagDEex2..ZLCIwSKT9OTb9lZSQpd0Hy8uuyK',NULL,NULL,NULL,'KkDsgvz2Lp','2024-02-03 03:05:26','2024-02-03 03:05:26','08123456789','ADMIN');
-INSERT INTO `users` VALUES (11,'Admin yunia','yunia@gmail.com','2024-02-03 03:05:26','$2y$10$BEX75Tq4BmP226T6sM.CmO6a3OTbh0rIfcfiKG9CYXne9yi4P1DTu',NULL,NULL,NULL,'w1WolWDjvL','2024-02-03 03:05:26','2024-02-03 03:05:26','08123456788','STAFF');
+INSERT INTO `users` VALUES (1,'Lolita Spencer','tomas18@example.org',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'lmchFGyW4j','2024-02-03 03:05:26','2024-02-03 03:05:26','+19076312708','USER');
+INSERT INTO `users` VALUES (2,'Carter O\'Hara','wisozk.johnny@example.org',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'EeigOT852M','2024-02-03 03:05:26','2024-02-03 03:05:26','+1-360-203-7879','STAFF');
+INSERT INTO `users` VALUES (3,'Chelsie Mante','schoen.adaline@example.org',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'YHQjkYzbJ9','2024-02-03 03:05:26','2024-02-03 03:05:26','(312) 316-3415','USER');
+INSERT INTO `users` VALUES (4,'Alanis Collins','johnson.keagan@example.net',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'nUQdpkM1SE','2024-02-03 03:05:26','2024-02-03 03:05:26','1-361-639-1575','STAFF');
+INSERT INTO `users` VALUES (5,'Allene Leuschke','maude.klein@example.org',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'PZBBFPMYFn','2024-02-03 03:05:26','2024-02-03 03:05:26','+14195794860','ADMIN');
+INSERT INTO `users` VALUES (6,'Dannie Sauer','reichel.sydnie@example.net',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'cPiURMMADU','2024-02-03 03:05:26','2024-02-03 03:05:26','617.995.6631','ADMIN');
+INSERT INTO `users` VALUES (7,'Jameson Monahan','laila20@example.org',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'vbjDl7KpEy','2024-02-03 03:05:26','2024-02-03 03:05:26','551.231.1152','ADMIN');
+INSERT INTO `users` VALUES (8,'Vicenta Parisian','sunny84@example.org',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'shPHEYkOYv','2024-02-03 03:05:26','2024-02-03 03:05:26','+1 (737) 854-5709','STAFF');
+INSERT INTO `users` VALUES (9,'Thomas Rutherford','norval.ebert@example.org',NULL,'2024-02-03 03:05:26','$2y$10$Wv3SAHstXcE.GxKWBojVW.KYiMx5X4pDgfCe0hHepYlF7hZdGfN5u',NULL,NULL,NULL,'pEKqovSwHO','2024-02-03 03:05:26','2024-02-03 03:05:26','+1-725-320-0996','USER');
+INSERT INTO `users` VALUES (10,'Admin indra','indra953@gmail.com','e2HzR8B9SxGez31-LAahn3:APA91bEjWW_8G4742MN7h3qCVB_oM66tdIpgNh6RSwcX8XytR8PsvmCMg_8QIEOiZjYoEJQBk5lxaAPXnZdRaaS3JqWEAmFhSw_E4OWG5FYXKpnc4kh4PGAFQ5BBqzhjfw06yln2MTms','2024-02-03 03:05:26','$2y$10$VAELelANVkl1TrpoGagDEex2..ZLCIwSKT9OTb9lZSQpd0Hy8uuyK',NULL,NULL,NULL,'KkDsgvz2Lp','2024-02-03 03:05:26','2024-02-06 20:29:11','08123456789','ADMIN');
+INSERT INTO `users` VALUES (11,'Admin yunia','yunia@gmail.com',NULL,'2024-02-03 03:05:26','$2y$10$BEX75Tq4BmP226T6sM.CmO6a3OTbh0rIfcfiKG9CYXne9yi4P1DTu',NULL,NULL,NULL,'w1WolWDjvL','2024-02-03 03:05:26','2024-02-03 03:05:26','08123456788','STAFF');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -616,4 +631,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-05 17:35:42
+-- Dump completed on 2024-02-07 17:06:42

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
@@ -76,6 +77,11 @@ class OrderController extends Controller
     public function getOrder($id)
     {
         $order = Order::with('orderItems.product')->find($id);
+
+        // send selected address object.
+        $address = Address::where('id', $order->address_id)->first();
+        $order->address = $address;
+
         return response()->json([
             'order' => $order,
         ], 200);
