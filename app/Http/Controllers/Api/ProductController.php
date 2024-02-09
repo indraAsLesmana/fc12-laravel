@@ -14,9 +14,18 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         // get products get all or search by category_id pagination
-        $products = Product::when($request->category, function ($query) use ($request) {
-            return $query->where('category', $request->category);
-        })->paginate(10);
+
+        // validate if request have category use this logic
+        if ($request->category) {
+            $products = Product::when($request->category, function ($query) use ($request) {
+                return $query->where('category', $request->category);
+            })->paginate(10);
+        } else if ($request->search) {
+            $products = Product::where('name', 'like', '%' . $request->search . '%')->paginate(15);
+        } else {
+            $products = Product::paginate(10);
+        }
+
         // make image from product is array string
         $products->each(function ($product) {
             $product->image = json_decode($product->image, true);
