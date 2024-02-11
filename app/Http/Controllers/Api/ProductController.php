@@ -21,7 +21,7 @@ class ProductController extends Controller
                 return $query->where('category', $request->category);
             })->paginate(10);
         } else if ($request->search) {
-            $products = Product::where('name', 'like', '%' . $request->search . '%')->paginate(15);
+            $products = Product::where('name', 'like', '%' . $request->search . '%')->paginate(10);
         } else {
             $products = Product::paginate(10);
         }
