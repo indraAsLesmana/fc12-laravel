@@ -7,7 +7,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: nginx
+    container_name: nginx-grocery
     ports:
       - "8081:80"
     volumes:
@@ -23,7 +23,7 @@ services:
     # If you're using Mac with ARM architecture processor uncomment the below code
     # platform: linux/x86_64
     image: mysql
-    container_name: mysql
+    container_name: mysql-grocery
     restart: unless-stopped
     tty: true
     volumes:
@@ -42,7 +42,7 @@ services:
 
   php:
     build:
-      context: ./php
+      context: .
       dockerfile: Dockerfile
     volumes:
       - ./app:/var/www
