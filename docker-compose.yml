@@ -1,0 +1,52 @@
+version: '3.9'
+
+networks:
+  laravel:
+
+services:
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8081:80"
+    volumes:
+      - ./app:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - php
+      - db
+    networks:
+      - laravel
+
+  db:
+    # If you're using Mac with ARM architecture processor uncomment the below code
+    # platform: linux/x86_64
+    image: mysql
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: mariadb
+      MYSQL_USER: mariadb
+      MYSQL_PASSWORD: mariadb
+      MYSQL_ROOT_PASSWORD: mariadb
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www
+    ports:
+      - "9000:9000"
+    networks:
+      - laravel
