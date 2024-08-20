@@ -101,7 +101,7 @@ class ProductController extends Controller
             'auth' => ['indra', 'indra'],
         ];
         foreach ($key as $k) {
-            $url = "http://fc12-groccery-service.asianpower.store/api/tab_content?key=". $k;
+            $url = "https://gabbarfarm.tutor93.com/api/tab_content?key=". $k;
             $response = $client->request('GET', $url, $options);
             $content = $response->getBody()->getContents();
             $content = json_decode($content, true);
